@@ -1,0 +1,74 @@
+.people-app-container {
+  max-width: 900px;
+  margin: 40px auto;
+  font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+  color: #333;
+  padding: 0 20px;
+}
+
+
+.tasks-section {
+  margin-bottom: 60px;
+}
+.section-title {
+  font-size: 1.6rem;
+  font-weight: 600;
+  border-bottom: 2px solid #007bff;
+  padding-bottom: 8px;
+  margin-bottom: 20px;
+  color: #007bff;
+}
+.tasks-table,
+.articles-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.95rem;
+  box-shadow: 0 2px 10px rgba(0,0,0,0.05);
+}
+.tasks-table th,
+.tasks-table td,
+.articles-table th,
+.articles-table td {
+  border: 1px solid #ddd;
+  padding: 10px 15px;
+  text-align: left;
+}
+.tasks-table th,
+.articles-table th {
+  background-color: #f0f8ff;
+  color: #004085;
+  font-weight: 600;
+}
+.center {
+  text-align: center;
+  width: 40px;
+  font-weight: 600;
+}
+.person-cell {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+.person-avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  object-fit: cover;
+  box-shadow: 0 0 8px rgba(0, 123, 255, 0.3);
+}
+
+.even-row {
+  background-color: #fafafa;
+}
+.odd-row {
+  background-color: #ffffff;
+}
+
+.articles-table a.article-link {
+  color: #007bff;
+  text-decoration: none;
+  font-weight: 600;
+}
+.articles-table a.article-link:hover {
+  text-decoration: underline;
+}

@@ -26,7 +26,7 @@ function AllTasks({ todos, dispatch }) {
 
   const handleSave = (id) => {
     dispatch({ type: 'EDIT_TODO', payload: { id, text: editText } });
-    setEditId(null);
+    setEditId();
     setEditText('');
   };
 
@@ -38,7 +38,7 @@ function AllTasks({ todos, dispatch }) {
     }
   };
 
-  // Filter todos by search term
+  //  search 
   const filteredTodos = todos.filter(todo =>
     todo.text.toLowerCase().includes(searchTerm.toLowerCase())
   );
@@ -72,7 +72,7 @@ function AllTasks({ todos, dispatch }) {
           />
         </div>
 
-        {/* Sort Selector */}
+        {/* Sort  */}
         <div style={{ marginBottom: '20px' }}>
           <label htmlFor="sort-select" style={{ marginRight: '10px' }}>
             Sort Tasks:
@@ -126,7 +126,7 @@ function AllTasks({ todos, dispatch }) {
           )}
         </ul>
 
-        {/* Modal for Adding Task */}
+        {/* Modal Adding Task */}
         {showModal && (
           <div className="modal-backdrop">
             <div className="modal">
@@ -145,8 +145,8 @@ function AllTasks({ todos, dispatch }) {
           </div>
         )}
 
-        {/* Display current sort order text */}
-        <div style={{ marginTop: '20px', padding: '10px', borderTop: '1px solid #ccc' }}>
+        {/* Display sort */}
+        <div className='sort'>
           <p><strong>Task Name</strong></p>
           <p>
             Sorted by created time (

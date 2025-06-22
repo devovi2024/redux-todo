@@ -26,6 +26,14 @@ function TodoApp({ todos, dispatch }) {
   return (
     <div className="container">
       <h1>Todays My Task</h1>
+
+      <div style={{ marginBottom: '10px' }}>
+        <Link to="/people" style={{ fontSize: '18px', color: '#007bff', textDecoration: 'underline' }}>
+          People
+        </Link>
+      </div>
+
+
       <div className="input-section">
         <input
           type="text"
@@ -77,10 +85,10 @@ function TodoApp({ todos, dispatch }) {
       </section>
 
       <section>
-        <div style={{ marginTop: '30px' }}>
-          <Link to="/all" style={{ textDecoration: 'none', color: '#007bff', fontWeight: 'bold' }}>
+        <div className="see-all-link-container">
+        <Link to="/all" className="see-all-link">
             👉 See All Tasks
-          </Link>
+        </Link>
         </div>
       </section>
     </div>
