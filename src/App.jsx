@@ -1,10 +1,7 @@
-function App () {
+import TodoApp from './components/TodoApp';
 
-    return (
-        <>
-            <h1>Hi</h1>
-        </>
-    )
+function App() {
+  return <TodoApp />;
 }
 
 export default App;

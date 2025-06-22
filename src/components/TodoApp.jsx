@@ -1,57 +1,85 @@
-import React, { useState } from "react";
-import { connect } from "react-redux";
+import React, { useState } from 'react';
+import { connect } from 'react-redux';
 
 function TodoApp({ todos, dispatch }) {
   const [text, setText] = useState('');
 
-  function handleAdd() {
-    if (text !== '') {
+  const handleAdd = () => {
+    if (text.trim() !== '') {
       dispatch({ type: 'ADD_TODO', payload: text });
       setText('');
     }
-  }
+  };
 
-  function handleDelete(id) {
+  const handleDelete = (id) => {
     dispatch({ type: 'DELETE_TODO', payload: id });
-  }
+  };
+
+  const handleToggle = (id) => {
+    dispatch({ type: 'TOGGLE_COMPLETE', payload: id });
+  };
+
+  const incompleteTodos = todos.filter(todo => !todo.completed);
+  const completedTodos = todos.filter(todo => todo.completed);
 
   return (
-    <div style={{ padding: "20px" }}>
-      <h2> My Todays List</h2>
-      <input
-        type="text"
-        value={text}
-        placeholder="Write your task"
-        onChange={(e) => setText(e.target.value)}
-      />
-      <button onClick={handleAdd}>Add</button>
+    <div className="container">
+      <h1>Todays My Task</h1>
+      <div className="input-section">
+        <input
+          type="text"
+          value={text}
+          onChange={(e) => setText(e.target.value)}
+          placeholder="Enter todays task"
+        />
+        <button onClick={handleAdd}>Add</button>
+      </div>
 
-      <ul>
-        {todos.map((todo) => (
-          <li key={todo.id}>
-            {todo.text}
-            <button onClick={() => handleDelete(todo.id)}>Remove Todays</button>
-          </li>
-        ))}
-      </ul>
+      <section className="todo-section">
+        <h2>Pending Tasks</h2>
+        <ul>
+          {incompleteTodos.map((todo) => (
+            <li key={todo.id} className="fade">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={todo.completed}
+                  onChange={() => handleToggle(todo.id)}
+                />
+                <span>{todo.text}</span>
+              </label>
+              <button onClick={() => handleDelete(todo.id)}>Remove</button>
+            </li>
+          ))}
+          {incompleteTodos.length === 0 && <p>No pending tasks</p>}
+        </ul>
+      </section>
+
+      <section className="todo-section completed">
+        <h2>Completed Tasks</h2>
+        <ul>
+          {completedTodos.map((todo) => (
+            <li key={todo.id} className="fade completed-item">
+              <label>
+                <input
+                  type="checkbox"
+                  checked={todo.completed}
+                  onChange={() => handleToggle(todo.id)}
+                />
+                <span>{todo.text}</span>
+              </label>
+              <button onClick={() => handleDelete(todo.id)}>Remove</button>
+            </li>
+          ))}
+          {completedTodos.length === 0 && <p>No completed tasks</p>}
+        </ul>
+      </section>
     </div>
   );
 }
 
-function StateToProps(state) {
-  return {
-    todos: state.todos
-  };
-}
+const mapStateToProps = (state) => ({
+  todos: state.todos,
+});
 
-export default connect(StateToProps)(TodoApp);
-
-
-
-// text
-
-// todos  is array 
-
-// store with connect 
-
-// dispatch to Redux action send 
+export default connect(mapStateToProps)(TodoApp);
