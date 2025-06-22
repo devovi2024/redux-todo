@@ -1,38 +1,45 @@
-
 const initialState = {
   todos: [],
 };
 
-const todoReducer = (state = initialState, action) => {
-  switch (action.type) {
-    case 'ADD_TODO':
-      return {
-        ...state,
-        todos: [
-          ...state.todos,
-          { id: Date.now(), text: action.payload, completed: false },
-        ],
-      };
+const handlers = {
+  ADD_TODO: (state, action) => ({
+    ...state,
+    todos: [
+      ...state.todos,
+      {
+        id: Date.now(),
+        text: action.payload,
+        completed: false,
+      },
+    ],
+  }),
 
-    case 'DELETE_TODO':
-      return {
-        ...state,
-        todos: state.todos.filter((todo) => todo.id !== action.payload),
-      };
+  DELETE_TODO: (state, action) => ({
+    ...state,
+    todos: state.todos.filter((todo) => todo.id !== action.payload),
+  }),
 
-    case 'TOGGLE_COMPLETE':
-      return {
-        ...state,
-        todos: state.todos.map((todo) =>
-          todo.id === action.payload
-            ? { ...todo, completed: !todo.completed }
-            : todo
-        ),
-      };
+  TOGGLE_COMPLETE: (state, action) => ({
+    ...state,
+    todos: state.todos.map((todo) =>
+      todo.id === action.payload
+        ? { ...todo, completed: !todo.completed }
+        : todo
+    ),
+  }),
 
-    default:
-      return state;
-  }
+  EDIT_TODO: (state, action) => ({
+    ...state,
+    todos: state.todos.map((todo) =>
+      todo.id === action.payload.id
+        ? { ...todo, text: action.payload.text }
+        : todo
+    ),
+  }),
 };
+
+const todoReducer = (state = initialState, action) =>
+  handlers[action.type] ? handlers[action.type](state, action) : state;
 
 export default todoReducer;

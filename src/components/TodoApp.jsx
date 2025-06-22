@@ -1,5 +1,6 @@
 import React, { useState } from 'react';
 import { connect } from 'react-redux';
+import { Link } from 'react-router-dom';
 
 function TodoApp({ todos, dispatch }) {
   const [text, setText] = useState('');
@@ -73,6 +74,14 @@ function TodoApp({ todos, dispatch }) {
           ))}
           {completedTodos.length === 0 && <p>No completed tasks</p>}
         </ul>
+      </section>
+
+      <section>
+        <div style={{ marginTop: '30px' }}>
+          <Link to="/all" style={{ textDecoration: 'none', color: '#007bff', fontWeight: 'bold' }}>
+            👉 See All Tasks
+          </Link>
+        </div>
       </section>
     </div>
   );
